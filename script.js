@@ -11,13 +11,13 @@ If a number is not divisible by either 3 or 5, log the number.
 
 for (let i = 0; i <= 100; i++) {
   if (i % 3 === 0 && i % 5 === 0) {
-    console.log("Fizz Buzz");
+    // console.log("Fizz Buzz");
   } else if (i % 3 === 0) {
-    console.log("Fizz");
+    // console.log("Fizz");
   } else if (i % 5 === 0) {
-    console.log("Buzz");
+    // console.log("Buzz");
   } else {
-    console.log(i);
+    // console.log(i);
   }
 }
 
@@ -67,7 +67,54 @@ Use the example string provided above to test your program. Once you are confide
 Index,Mass (kg),Spring 1 (m),Spring 2 (m)\n1,0.00,0.050,0.050\n2,0.49,0.066,0.066\n3,0.98,0.087,0.080\n4,1.47,0.116,0.108\n5,1.96,0.142,0.138\n6,2.45,0.166,0.158\n7,2.94,0.193,0.174\n8,3.43,0.204,0.192\n9,3.92,0.226,0.205\n10,4.41,0.238,0.232
  */
 
-console.log("=====Method 1=====");
+// Before going into this! How to split a string by a delimiter:
+
+console.log("===How to split a string by a delimiter using while loop===");
+const str = "ID,Name,Occupation,Age";
+const delimiter = ",";
+const array = [];
+
+let index = 0;
+while (index < str.length) {
+  const start = index;
+  let currentEntry = "";
+  while (str[index] !== delimiter && index < str.length) {
+    currentEntry += str[index];
+    index++;
+  }
+  // or use const currentEntry = str.substring(start, index); instead of string concatenation
+  array.push(currentEntry);
+  index++;
+}
+
+console.log(array); // Output: ["ID", "Name", "Occupation", "Age"]
+
+console.log("===How to split a string by a delimiter using for loop===");
+
+const str1 = "ID,Name,Occupation,Age";
+const delimiter1 = ",";
+const array1 = [];
+
+let currentEntry = "";
+
+for (let i = 0; i <= str.length; i++) {
+  const currentChar = str1[i];
+
+  // Check if the current character is the delimiter or the end of the string
+  if (currentChar === delimiter1 || i === str1.length) {
+    // Add the current entry to the array
+    array1.push(currentEntry);
+    // Reset the current entry for the next iteration
+    currentEntry = "";
+  } else {
+    // Add the current character to the current entry
+    currentEntry += currentChar;
+  }
+}
+
+console.log(array1);
+
+console.log("=====Solution 1=====");
 const string = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor's Assistant,26`;
 
 let cell1 = "";
@@ -105,7 +152,7 @@ for (let i = 0; i < string.length; i++) {
   }
 }
 
-console.log("=====Method 2=====");
+console.log("=====Solution 2=====");
 const csvString = `Index,Mass (kg),Spring 1 (m),Spring 2 (m)\n1,0.00,0.050,0.050\n2,0.49,0.066,0.066\n3,0.98,0.087,0.080\n4,1.47,0.116,0.108\n5,1.96,0.142,0.138\n6,2.45,0.166,0.158\n7,2.94,0.193,0.174\n8,3.43,0.204,0.192\n9,3.92,0.226,0.205\n10,4.41,0.238,0.232`;
 
 let cellData = "";
@@ -133,3 +180,28 @@ if (cellData.length > 0) {
   rowData += cellData;
   console.log(rowData);
 }
+
+console.log("=====Solution 3=====");
+let data =
+  "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26";
+let ID = "";
+let Name = "";
+let Occupation = "";
+let Age = "";
+let colCounter = 1;
+for (i = 0; i < data.length; i++) {
+  //console.log(data[i]);
+  if (data[i] == "\n") {
+    colCounter++;
+  }
+  if (colCounter == 1) {
+    ID += data[i];
+  } else if (colCounter == 2) {
+    Name += data[i];
+  } else if (colCounter == 3) {
+    Occupation += data[i];
+  } else {
+    Age += data[i];
+  }
+}
+console.log(ID, Name, Occupation, Age);
